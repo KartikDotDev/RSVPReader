@@ -1,0 +1,424 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Prevent scrollbars on main container */
+  background-color: var(--main-bg-color);
+  color: var(--main-fg-color);
+}
+
+.top-bar {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border-color, #ccc);
+  background-color: var(--controls-bg-color, #f0f0f0);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-controls-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.top-bar button,
+.top-bar input,
+.top-bar select {
+  margin-right: 5px;
+}
+
+.loading-message, .error-message {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+.loading-message {
+  background-color: var(--info-bg-color, #eef);
+  color: var(--info-fg-color, #33a);
+}
+.error-message {
+  background-color: var(--error-bg-color, #fee);
+  color: var(--error-fg-color, #a33);
+  border: 1px solid var(--error-border-color, #d99);
+}
+
+
+.main-content {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.pdf-panel {
+  width: 35%;
+  min-width: 300px; /* Ensure PDF panel is usable */
+  border-right: 1px solid var(--border-color, #ccc);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Allows PDF viewer itself to scroll if content overflows */
+  background-color: var(--pdf-panel-bg, #e9e9e9);
+}
+
+.rsvp-main-panel {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center RSVPDisplay and SettingsPanel */
+  /* justify-content: center; /* Vertically center if not much content */
+  padding: 20px;
+  overflow-y: auto; /* Scroll if settings panel makes it too tall */
+  background-color: var(--rsvp-panel-bg, #ffffff);
+}
+
+.rsvp-panel {
+  display: flex; /* To center the RSVPDisplay component */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Take available width */
+  flex-grow: 1; /* Allow it to take space, helping center RSVPDisplay */
+  min-height: 200px; /* Ensure space for RSVP even if settings are open */
+}
+
+.status-bar {
+  padding: 8px 15px;
+  border-top: 1px solid var(--border-color, #ccc);
+  background-color: var(--status-bg-color, #e0e0e0);
+  font-size: 0.9em;
+  text-align: left;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background-color: var(--progress-trough-color, #e0e0e0);
+  /* margin-top: 5px; No margin, directly under top-bar */
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--progress-bar-color, #0078d7);
+  transition: width 0.1s linear;
+}
+
+.settings-panel-container {
+  width: 100%;
+  max-width: 600px; /* Max width for settings */
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 8px;
+  background-color: var(--settings-bg-color, #f9f9f9);
+}
+.settings-panel-container h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-color-light, #eee);
+  padding-bottom: 5px;
+}
+
+.setting-group {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+.setting-group label {
+  margin-right: 5px;
+  white-space: nowrap;
+}
+.setting-group input[type="number"] {
+  width: 70px;
+  padding: 4px;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-bg-color);
+  color: var(--input-fg-color);
+}
+.setting-group input[type="color"] {
+  width: 40px;
+  height: 25px;
+  padding: 0;
+  border: 1px solid var(--input-border-color, #ccc);
+  background-color: transparent; /* Show the color itself */
+  cursor: pointer;
+}
+.setting-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+.setting-group input[type="range"] {
+  flex-grow: 1; /* Allow range slider to take available space */
+}
+
+
+/* High Contrast Mode - Applied to body.high-contrast */
+.high-contrast {
+  --main-bg-color: #000000;
+  --main-fg-color: #ffffff;
+  --controls-bg-color: #1a1a1a;
+  --controls-fg-color: #ffffff;
+  --button-bg-color: #333333;
+  --button-fg-color: #ffffff;
+  --button-border-color: #ffffff;
+  --input-bg-color: #222222;
+  --input-fg-color: #ffffff;
+  --input-border-color: #ffffff;
+  --pdf-panel-bg: #0a0a0a;
+  --rsvp-panel-bg: #000000;
+  --rsvp-text-color: #ffff00; /* Yellow text for high contrast RSVP */
+  --rsvp-bg-color: #000000;   /* Black background for high contrast RSVP */
+  --status-bg-color: #1a1a1a;
+  --settings-bg-color: #111111;
+  --progress-trough-color: #555555;
+  --progress-bar-color: #ffff00; /* Yellow progress bar */
+  --border-color: #666666;
+  --border-color-light: #444444;
+  --focus-outline-color: #ffff00; /* Yellow focus outline */
+  --info-bg-color: #334;
+  --info-fg-color: #ccf;
+  --error-bg-color: #433;
+  --error-fg-color: #fcc;
+  --error-border-color: #c99;
+}
+
+.high-contrast .pdf-panel {
+  border-right: 1px solid var(--border-color);
+}
+.high-contrast .settings-panel-container {
+  border: 1px solid var(--border-color);
+}
+.high-contrast .settings-panel-container h3 {
+  border-bottom: 1px solid var(--border-color-light);
+}
+.high-contrast .rsvp-word-container {
+  border: 1px solid var(--rsvp-text-color); /* Ensure border is visible */
+}
+
+/* Basic focus styles - enhance as needed */
+*:focus-visible {
+  outline: 3px solid var(--focus-outline-color, #0078d7);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 2px var(--main-bg-color, white); /* Helps visibility against complex backgrounds */
+}
+
+.ambient-sound-player {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color-light, #eee);
+}
+.high-contrast .ambient-sound-player {
+    border-top: 1px solid var(--border-color-light);
+}
+.ambient-sound-player h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.ambient-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.ambient-controls select, .ambient-controls button, .ambient-controls input[type="range"] {
+  padding: 4px 8px;
+}
+.ambient-controls label { white-space: nowrap; }
+
+
+.controls-container { /* Styles for the main control group from Controls.jsx */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.wpm-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.wpm-control label {
+  white-space: nowrap;
+}
+.wpm-number-input {
+  width: 65px;
+  padding: 4px;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-bg-color);
+  color: var(--input-fg-color);
+}
+.wpm-control input[type="range"] {
+  min-width: 100px; /* Give WPM slider some space */
+}
+
+.pdf-viewer-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Fill the pdf-panel */
+}
+.pdf-controls {
+  padding: 8px;
+  background-color: var(--controls-bg-color); /* Use same as top bar for consistency */
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pdf-document-wrapper {
+  flex-grow: 1;
+  overflow: auto; /* Important for scrolling PDF content */
+  display: flex;
+  justify-content: center; /* Center the page horizontally */
+  padding: 10px 0; /* Add some padding, especially top/bottom */
+  background-color: var(--pdf-panel-bg); /* Match panel background */
+}
+.pdf-document-wrapper .react-pdf__Page__canvas {
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  margin: 0 auto; /* Ensure canvas is centered if smaller than wrapper */
+}
+.high-contrast .pdf-document-wrapper .react-pdf__Page__canvas {
+  box-shadow: 0 0 5px var(--border-color);
+}
+.pdf-placeholder, .pdf-loading, .pdf-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  font-style: italic;
+  color: var(--main-fg-color); /* Use main foreground color */
+  opacity: 0.7;
+}
+.pdf-error {
+  color: var(--error-fg-color);
+  font-weight: bold;
+  opacity: 1;
+}
+
+
+.rsvp-word-container {
+  /* Dynamic styles (fontSize, color, backgroundColor) are applied inline by RSVPDisplay.jsx */
+  /* Static styles defining its shape, alignment, etc. */
+  min-height: 100px;
+  min-width: 250px; /* Min width to prevent collapsing */
+  max-width: 90%;   /* Max width to keep it reasonable */
+  padding: 20px 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  display: flex; /* For centering the word content if it's ever more complex */
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  word-break: break-all; /* In case a very long "word" (e.g. URL) is encountered */
+}
+.high-contrast .rsvp-word-container {
+  box-shadow: 0 1px 3px rgba(200,200,0,0.2); /* Lighter shadow for contrast */
+}
+
+/* Styles for settings panel content (if any specific needed beyond App.css) */
+/* These are now integrated into .settings-panel-container and .setting-group */
+
+.page-turn-notification {
+  position: fixed;
+  bottom: 60px; /* Adjust to be above status bar or wherever you prefer */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--info-bg-color, #d1ecf1); /* Bootstrap info color */
+  color: var(--info-fg-color, #0c5460);
+  padding: 8px 15px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  z-index: 1050; /* High z-index to be on top */
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid var(--info-border-color, #bee5eb); /* Matching border */
+  animation: fadeInOut 1.5s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+}
+
+.high-contrast .page-turn-notification {
+  background-color: var(--info-bg-color); /* Use HC variables defined in :root or .high-contrast */
+  color: var(--info-fg-color);
+  border-color: var(--info-border-color); /* Make sure info-border-color is defined for HC */
+  box-shadow: 0 0 5px var(--border-color);
+}
+
+/* Ensure info-border-color is available, if not defined in :root, add it: */
+:root {
+  /* ... other variables ... */
+  --info-border-color: #bee5eb; /* Example, adjust as needed */
+}
+.high-contrast {
+  /* ... other HC variables ... */
+  --info-border-color: #6fb3c0; /* Example for HC, adjust as needed */
+}
+
+.ambient-sound-player {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color-light, #eee);
+}
+.high-contrast .ambient-sound-player {
+    border-top: 1px solid var(--border-color-light);
+}
+.ambient-sound-player h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.ambient-sound-control-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: var(--controls-bg-color, #f8f9fa); /* A slightly different background for the group */
+  border: 1px solid var(--border-color, #dee2e6);
+}
+.high-contrast .ambient-sound-control-group {
+  background-color: var(--controls-bg-color);
+  border: 1px solid var(--border-color);
+}
+
+.ambient-sound-name {
+  flex-grow: 1;
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.ambient-controls-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ambient-controls-inline button {
+  padding: 4px 8px;
+  min-width: 70px; /* Ensure Play/Pause buttons have a decent width */
+}
+
+.ambient-controls-inline input[type="range"] {
+  width: 100px; /* Adjust as needed */
+}
